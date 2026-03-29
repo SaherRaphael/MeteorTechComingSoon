@@ -1,0 +1,65 @@
+<style>
+    /* 1. Force the background to black on every root level */
+    :root, html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+        background-color: #000000 !important; /* !important ensures no browser override */
+        overflow: hidden;
+        font-family: 'Segoe UI', Arial, sans-serif;
+    }
+
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+    }
+
+    .bg-image {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw; /* Use Viewport Width */
+        height: 100vh; /* Use Viewport Height */
+        object-fit: cover;
+        z-index: 1;
+        
+        /* 2. The 'Scale' Trick: 
+           Scaling to 1.01 makes the image 1% larger than the screen, 
+           forcing it to bleed over any "gray" 1px edge gaps in Edge. */
+        transform: scale(1.01); 
+        
+        animation: fadeOutImage 3s ease-in-out 2s forwards;
+    }
+
+    .content {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        opacity: 0;
+        padding: 20px;
+        animation: fadeInText 2s ease-in-out 4s forwards;
+    }
+
+    /* Desktop Sizes */
+    h1 { font-size: 3.5em; margin: 0; letter-spacing: 4px; line-height: 1.2; }
+    p { font-size: 1.2em; opacity: 0.8; margin-top: 10px; letter-spacing: 2px; }
+
+    /* Mobile Responsiveness */
+    @media (max-width: 768px) {
+        h1 { font-size: 2.2em; letter-spacing: 2px; }
+        p { font-size: 1em; }
+    }
+
+    @keyframes fadeOutImage {
+        0% { opacity: 1; }
+        100% { opacity: 0; visibility: hidden; } /* Added visibility hidden to 'remove' it from clicks */
+    }
+
+    @keyframes fadeInText {
+        0% { opacity: 0; transform: translateY(10px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+</style>
